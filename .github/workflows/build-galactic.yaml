@@ -42,8 +42,7 @@ jobs:
             as2_motion_reference_handlers
             as2_msgs
             as2_state_estimator
-          target-ros2-distro: galactic
-          skip-tests: true
+          target-ros2-distro: galactic 
           colcon-defaults: |
             { 
               "build": {
