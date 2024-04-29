@@ -55,7 +55,7 @@ class TestMission(unittest.TestCase):
             "verbose": "True",
             "plan": [
                 {
-                    "behavior": "dummy",
+                    "behavior": "test",
                     "method": "__call__",
                     "args": {
                         "arg1": 1.0,
@@ -64,7 +64,7 @@ class TestMission(unittest.TestCase):
                     }
                 },
                 {
-                    "behavior": "dummy",
+                    "behavior": "test",
                     "args": {
                         "arg2": 98.0,
                         "arg1": 99.0,
@@ -72,7 +72,7 @@ class TestMission(unittest.TestCase):
                     }
                 },
                 {
-                    "behavior": "dummy",
+                    "behavior": "test",
                     "method": "stop",
                     "args": {
                     }
@@ -82,25 +82,23 @@ class TestMission(unittest.TestCase):
         mission = Mission.parse_raw(dummy_mission)
         stack = mission.stack
         item = stack.next()
-        assert item.behavior == "dummy"
+        assert item.behavior == "test"
         assert item.method == "__call__"
         assert item.args == {'arg1': 1.0, 'arg2': 2.0, 'wait': 'False'}
 
         item = stack.next()
-        assert item.behavior == "dummy"
+        assert item.behavior == "test"
         assert item.method == "__call__"
         assert item.args == {'arg1': 99.0, 'arg2': 98.0, 'wait': 'False'}
 
         item = stack.next()
-        assert item.behavior == "dummy"
+        assert item.behavior == "test"
         assert item.method == "stop"
         assert item.args == {}
 
-        rclpy.init()
         interpreter = MissionInterpreter(mission)
         interpreter.perform_mission()
         interpreter.shutdown()
-        rclpy.shutdown()
 
     def test_load_modules(self):
         """Test if modules are loaded correctly
@@ -146,7 +144,6 @@ class TestMission(unittest.TestCase):
 
         mission = Mission.parse_raw(load_modules_mission)
 
-        rclpy.init()
         interpreter = MissionInterpreter(mission)
         assert sorted(interpreter.drone.modules.keys()) == [
             "go_to", "land", "takeoff"
@@ -156,8 +153,10 @@ class TestMission(unittest.TestCase):
             "takeoff", "go_to", "go_to", "land"
         ]
         interpreter.shutdown()
-        rclpy.shutdown()
 
 
 if __name__ == "__main__":
+    rclpy.init()
+
     unittest.main()
+    rclpy.shutdown()
