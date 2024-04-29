@@ -34,18 +34,19 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ********************************************************************************/
 
-#include <geometry_msgs/msg/point.hpp>
-#include <std_msgs/msg/header.hpp>
-
 #include "as2_behavior/behavior_server.hpp"
 #include "as2_core/names/actions.hpp"
 #include "as2_core/utils/frame_utils.hpp"
 #include "as2_msgs/action/generate_polynomial_trajectory.hpp"
-#include "as2_msgs/msg/pose_with_id.hpp"
-#include "as2_msgs/msg/yaw_mode.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
 #include "takeoff_behavior/takeoff_base.hpp"
+
+#include "as2_msgs/msg/pose_with_id.hpp"
+#include "as2_msgs/msg/yaw_mode.hpp"
+
+#include <geometry_msgs/msg/point.hpp>
+#include <std_msgs/msg/header.hpp>
 
 namespace takeoff_plugin_trajectory {
 
@@ -64,7 +65,7 @@ public:
         std::bind(&Plugin::result_callback, this, std::placeholders::_1);
   }
 
-  bool own_activate(as2_msgs::action::Takeoff::Goal& _goal) override {
+  bool own_activate(as2_msgs::action::Takeoff::Goal &_goal) override {
     if (!traj_gen_client_->wait_for_action_server(std::chrono::seconds(2))) {
       RCLCPP_ERROR(node_ptr_->get_logger(), "Trajectory generator action server not available");
       return false;
@@ -92,7 +93,7 @@ public:
     return true;
   }
 
-  bool own_modify(as2_msgs::action::Takeoff::Goal& _goal) override {
+  bool own_modify(as2_msgs::action::Takeoff::Goal &_goal) override {
     RCLCPP_INFO(node_ptr_->get_logger(), "Takeoff modified");
     as2_msgs::action::GeneratePolynomialTrajectory::Goal traj_generator_goal =
         takeoffGoalToTrajectoryGeneratorGoal(_goal);
@@ -110,7 +111,7 @@ public:
     return false;
   }
 
-  bool own_deactivate(const std::shared_ptr<std::string>& message) override {
+  bool own_deactivate(const std::shared_ptr<std::string> &message) override {
     RCLCPP_INFO(node_ptr_->get_logger(), "Takeoff cancel");
     // TODO: cancel trajectory generator
     RCLCPP_ERROR(node_ptr_->get_logger(), "Takeoff cancel not implemented yet");
@@ -118,7 +119,7 @@ public:
     return false;
   }
 
-  void own_execution_end(const as2_behavior::ExecutionStatus& state) override {
+  void own_execution_end(const as2_behavior::ExecutionStatus &state) override {
     RCLCPP_INFO(node_ptr_->get_logger(), "Takeoff end");
     traj_gen_goal_accepted_   = false;
     traj_gen_result_received_ = false;
@@ -141,7 +142,7 @@ public:
         RCLCPP_INFO(node_ptr_->get_logger(), "Trajectory generator goal accepted");
         traj_gen_goal_accepted_ = true;
       } else {
-        auto& clk = *node_ptr_->get_clock();
+        auto &clk = *node_ptr_->get_clock();
         RCLCPP_INFO_THROTTLE(node_ptr_->get_logger(), clk, 5000,
                              "Waiting for trajectory generator goal to be accepted");
         return as2_behavior::ExecutionStatus::RUNNING;
@@ -160,7 +161,7 @@ public:
     }
 
     // Waiting for result
-    auto& clk = *node_ptr_->get_clock();
+    auto &clk = *node_ptr_->get_clock();
     RCLCPP_INFO_THROTTLE(node_ptr_->get_logger(), clk, 5000,
                          "Waiting for trajectory generator result");
     return as2_behavior::ExecutionStatus::RUNNING;
@@ -173,7 +174,7 @@ public:
     return;
   }
 
-  void result_callback(const GoalHandleTrajectoryGenerator::WrappedResult& result) {
+  void result_callback(const GoalHandleTrajectoryGenerator::WrappedResult &result) {
     traj_gen_result_received_ = true;
     traj_gen_result_          = result.result->trajectory_generator_success;
     return;
@@ -191,7 +192,7 @@ private:
 
 private:
   as2_msgs::action::GeneratePolynomialTrajectory::Goal takeoffGoalToTrajectoryGeneratorGoal(
-      const as2_msgs::action::Takeoff::Goal& _goal) {
+      const as2_msgs::action::Takeoff::Goal &_goal) {
     as2_msgs::action::GeneratePolynomialTrajectory::Goal traj_generator_goal;
 
     traj_generator_goal.header.stamp    = node_ptr_->now();
