@@ -1,3 +1,0 @@
-ament_prepend_unique_value AS2_MODULES_PATH "$COLCON_PREFIX_PATH/share/as2_python_api/modules"
-
-ament_prepend_unique_value LD_LIBRARY_PATH "$COLCON_PREFIX_PATH/lib"
