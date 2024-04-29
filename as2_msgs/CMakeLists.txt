@@ -44,7 +44,6 @@ set(MSGS_FILES
   "msg/AlertEvent.msg"
   "msg/BehaviorStatus.msg"
   "msg/YawMode.msg"
-  "msg/GimbalControl.msg"
 )
 
 set(SRVS_FILES
@@ -72,7 +71,6 @@ set(ACTION_FILES
   "action/SetArmingState.action"
   "action/SetOffboardMode.action"
   "action/FollowReference.action"
-  "action/PointGimbal.action"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
