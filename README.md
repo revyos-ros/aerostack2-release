@@ -1,34 +1,103 @@
-[![arXiv](https://img.shields.io/badge/arXiv-2303.18237-b31b1b.svg)](https://arxiv.org/abs/2303.18237) [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) [![Build Status ROS2 Package](https://build.ros2.org/job/Hbin_uJ64__aerostack2__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__aerostack2__ubuntu_jammy_amd64__binary/) [![codecov_test](https://github.com/aerostack2/aerostack2/actions/workflows/codecov_test.yaml/badge.svg)](https://github.com/aerostack2/aerostack2/actions/workflows/codecov_test.yaml)
+# gazebo_assets
+Colletion of AS2 Gazebo assets and scripts.
 
-# Aerostack2
+## INDEX
+- [HOW TO RUN](#how-to-run-basic-usage)
+- [OPTIONS](#options)
+    - [ENV VARS](#env-vars)
+    - [CONFIG FILE](#config-file)
+- [MORE OPTIONS](#more-options)
+- [EXAMPLES](#examples)
+- [ADVANCED USAGE](#advanced-usage)
+---
 
-Aerostack2 is a ROS 2 framework developed to create autonomous multi-aerial-robots systems in an easy and powerful way.
+## HOW TO RUN: Basic usage
 
-Currently is developed and tested over ROS 2 humble (over Ubuntu 22.04) and galactic (over Ubuntu 20.04).
+Previously setting AS2 environment, simply run:
+```bash
+${AEROSTACK2_PATH}/as2_simulation_assets/gazebo_assets/scripts/default_run.sh 
+```
 
-![Build for Ubuntu 22.04 and ROS humble](https://github.com/aerostack2/aerostack2/actions/workflows/build-humble.yaml/badge.svg) ![Build for Ubuntu 20.04 and ROS galactic](https://github.com/aerostack2/aerostack2/actions/workflows/build-galactic.yaml/badge.svg)
+or using a config file (see [config files](#config-file)) :
 
-Most important features:
-- Natively developed on ROS 2
-- Complete modularity, allowing elements to be changed or interchanged without affecting the rest of the system
-- Independence of the aerial platform. Easy Sim2Real deployment.
-- Project-oriented, allowing to install and use only the necessary packages for the application to be developed. 
-- Swarming orientation.
+```bash
+${AEROSTACK2_PATH}/as2_simulation_assets/gazebo_assets/scripts/default_run.sh <config-file>
+```
 
-Please visit the [[Aerostack2 Documentation]](https://aerostack2.github.io) for a complete documentation.
+This will run for you **gzserver**, spawn an **iris model**, compile and run **PX4 SITL rtps** and open **gzclient**.
 
-Installation instructions can be found [[here]](https://aerostack2.github.io/_00_getting_started/index.html#ubuntu-debian).
+## OPTIONS
+Inital configuration aspects as world, drone model, drone pose or adding several drones can be done setting **environment variables** or using a **config file**.
 
-<br />
+### ENV VARS
+Previously set needed environment variables before launching the script.
 
-https://user-images.githubusercontent.com/35956525/231999883-e491aa08-2835-47a9-9c68-5b2936e8594e.mp4
+- World
+    ```bash
+    export PX4_SITL_WORLD=<path-to-world>
+    ```
+- Drone model
+    ```bash
+    export UAV_MODEL=<model-name>
+    ```
+- Drone pose
+    ```bash
+    export UAV_X=<float>  # meters
+    export UAV_Y=<float>  # meters
+    export UAV_Z=<float>  # meters
+    export UAV_YAW=<float>  # radians
+    ```
 
-<br />
+### CONFIG FILE
+Using a config file lets you to set the simulation environment. You can select a world (or none) and attach to it a number of desired drones with desired model and position. Please pay atention to teh format file, otherwise it may fail.
 
-# Credits
+Example of a config file:
+```json
+{
+    "world": "${AEROSTACK2_PATH}/as2_simulation_assets/gazebo_assets/worlds/frames.world",
+    "0": {
+        "model": "iris_fpv",
+        "pose": [ 0.0, 0.0, 0.0, 1.57 ]
+    },
+    "1": {
+        "model": "iris",
+        "pose": [ 3.0, 0.0, 0.0, 1.57 ]
+    }
+}
+```
 
-If you use the code in the academic context, please cite:
+## MORE OPTIONS
+- Use custom models in world/drone:
+    ```bash
+    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:<custom-model-path>
+    ```
+- Run simulation without gzclient (TBD):
+    ```bash
+    export HEADLESS=1
+    ```
+- Follow drone mode (TBD):
+    ```bash
+    export PX4_FOLLOW_MODE=1
+    ```
+- Change PX4 GPS origin:
 
-* M. Fernandez-Cortizas, M. Molina, P. Arias-Perez, R. Perez-Segui,
-D. Perez-Saura, and P. Campoy,  2023, ["Aerostack2: A software framework for
-developing multi-robot aerial systems"](https://arxiv.org/abs/2303.18237), ArXiv DOI 2303.18237.
+    ```bash
+    export PX4_HOME_LAT=28.143971  # degrees
+    export PX4_HOME_LON=-16.503213  # degrees
+    export PX4_HOME_ALT=0  # meters
+    ```
+- Change PX4 vehicle (TBD):
+    ```bash
+    export VEHICLE=iris  # typhoon
+    ```
+- Verbose mode:
+    ```bash
+    export VERBOSE_SIM=1
+    ```
+
+## EXAMPLES
+Several examples can be found on [test](/tests) folder.
+
+## ADVANCED USAGE
+
+If you want to build your own PX4 first, you can also check [test_run_sitl](/tests/test_run_sitl.sh) script.
