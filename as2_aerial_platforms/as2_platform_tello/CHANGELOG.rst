@@ -2,6 +2,17 @@
 Changelog for package as2_platform_tello
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.9 (2024-03-25)
+------------------
+* Missing params and new file name
+* Contributors: Javier Melero, Javilinos, pariaspe
+
+1.0.8 (2024-02-12)
+------------------
+
+1.0.7 (2024-02-04)
+------------------
+
 1.0.6 (2023-12-12)
 ------------------
 
