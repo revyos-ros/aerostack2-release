@@ -1,0 +1,101 @@
+ros-humble-as2-behavior-tree (1.0.9-3bullseye) bullseye; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 24 Mar 2024 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.8-3bullseye) bullseye; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 11 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.7-3bullseye) bullseye; urgency=high
+
+  * [refactor] format tests according with ament_lint_common() packages
+  * fix build warning
+  * Contributors: pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sat, 03 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.6-3bullseye) bullseye; urgency=high
+
+  * Takeoff and GoTo behavior renaming
+  * Contributors: Miguel Fernandez-Cortizas, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 11 Dec 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.5-3bullseye) bullseye; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 07 Nov 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.4-3bullseye) bullseye; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 22 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.3-3bullseye) bullseye; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 21 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.2-3bullseye) bullseye; urgency=high
+
+  * Merge pull request #292 <https://github.com/aerostack2/aerostack2/issues/292> from aerostack2/issue-289
+    Delete install_bt_dependencies.bash
+  * Delete install_bt_dependencies.bash
+    Closes #289 <https://github.com/aerostack2/aerostack2/issues/289>
+  * Merge pull request #235 <https://github.com/aerostack2/aerostack2/issues/235> from aerostack2/234-goto-bt-action-missing-frame
+    [as2_behavior_tree] GoTo Bt action missing frame
+  * adding short sleep after takeoff
+  * adding earth frame
+  * Contributors: Javilinos, Miguel Fernandez-Cortizas, RPS98, Rafael Pérez, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 16 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.1-3bullseye) bullseye; urgency=high
+
+  * Merge pull request #223 <https://github.com/aerostack2/aerostack2/issues/223> from aerostack2/200-unify-maintainer-in-packagexmls
+    Maintainer unified to CVAR-UPM
+  * Maintainer unified to CVAR-UPM
+  * Merge pull request #198 <https://github.com/aerostack2/aerostack2/issues/198> from aerostack2/197-as2_core-change-behaviour-to-behavior
+    197 as2 core change behaviour to behavior
+  * Change behaviour to behavior
+  * Contributors: Miguel Fernandez-Cortizas, RPS98, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 24 Apr 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (1.0.0-3bullseye) bullseye; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Fri, 17 Mar 2023 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (0.2.2-3bullseye) bullseye; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Mon, 19 Dec 2022 16:00:00 -0000
+
+ros-humble-as2-behavior-tree (0.2.1-3bullseye) bullseye; urgency=high
+
+  * Merge pull request #77 <https://github.com/aerostack2/aerostack2/issues/77> from aerostack2/76-as2_behavior_tree-wrong-target-link-libraries
+    [as2_behavior_tree] Removed old linking lib
+  * removed old linking lib
+  * Merge pull request #39 <https://github.com/aerostack2/aerostack2/issues/39> from aerostack2/37-as2_behavior_trees-documentation
+    [as2_behavior_trees] Documentation improved
+  * added index, details dropbox and missing nodes
+  * Merge pull request #33 <https://github.com/aerostack2/aerostack2/issues/33> from aerostack2/behavior_tree
+    Update behavior tree
+  * Update behavior tree
+  * px4 extended and ci actions
+  * user interfaces added
+  * Contributors: Miguel Fernandez-Cortizas, RPS98, Rafael Pérez, miferco97, pariaspe
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Sun, 18 Dec 2022 16:00:00 -0000
+
+
