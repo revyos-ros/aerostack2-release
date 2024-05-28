@@ -1,0 +1,12 @@
+Source: ros-humble-as2-keyboard-teleoperation
+Section: misc
+Priority: optional
+Maintainer: CVAR-UPM <cvar.upm3@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), python3-pytest <!nocheck>, ros-humble-ament-copyright <!nocheck>, ros-humble-ament-flake8 <!nocheck>, ros-humble-ament-pep257 <!nocheck>, ros-humble-as2-motion-reference-handlers, ros-humble-as2-python-api, ros-humble-rclpy, ros-humble-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-humble-as2-keyboard-teleoperation
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, ros-humble-as2-motion-reference-handlers, ros-humble-as2-python-api, ros-humble-rclpy, ros-humble-ros-workspace
+Description: Keyboard Teleoperation
