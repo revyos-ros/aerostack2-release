@@ -1,5 +1,5 @@
 """
-profiling.py
+dummy_module.py
 """
 
 # Copyright 2022 Universidad Politécnica de Madrid
@@ -30,50 +30,46 @@ profiling.py
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import rclpy
 
-from as2_python_api.drone_interface_base import DroneInterfaceBase
-from as2_python_api.drone_interface import DroneInterface
+__authors__ = "Pedro Arias Pérez"
+__copyright__ = "Copyright (c) 2022 Universidad Politécnica de Madrid"
+__license__ = "BSD-3-Clause"
+__version__ = "0.1.0"
 
+import typing
+import time
 
-def loading_mod():
-    module_takeoff = 'as2_python_api.modules.takeoff_module'
-    module_land = 'as2_python_api.modules.land_module'
-    module_goto = 'as2_python_api.modules.go_to_module'
-    module_follow_path = 'as2_python_api.modules.follow_path_module'
+from as2_python_api.modules.module_base import ModuleBase
 
-    drone_interface = DroneInterfaceBase("drone_sim_0", verbose=True)
-
-    drone_interface.load_module(module_takeoff)
-    drone_interface.load_module(module_land)
-    drone_interface.load_module(module_goto)
-    drone_interface.load_module(module_follow_path)
-    print(drone_interface.modules)
-
-    drone_interface.shutdown()
+if typing.TYPE_CHECKING:
+    from ..drone_interface import DroneInterface
 
 
-def preloaded_mod():
-    drone_interface = DroneInterface("drone_sim_0", verbose=True)
-    print(drone_interface.modules)
+class DummyModule(ModuleBase):
+    """Dummy Module
+    """
+    __alias__ = "dummy"
 
-    drone_interface.shutdown()
+    def __init__(self, drone: 'DroneInterface') -> None:
+        super().__init__(drone, self.__alias__)
+        self.stopped = False
 
+    def __call__(self, arg1: float, arg2: int, wait: bool = True) -> None:
+        """Dummy call
+        """
+        if isinstance(wait, str):
+            wait = wait.lower() == 'true'
+        self.stopped = not wait
+        print(f"{self.__alias__} called with {arg1=}, {arg2=} and {wait=}")
+        while not self.stopped:
+            print(f"{self.__alias__} called with {arg1=}, {arg2=} and {wait=}")
+            time.sleep(0.5)
 
-def main():
-    import cProfile
-    import pstats
+    def stop(self):
+        """stop dummy module"""
+        self.stopped = True
 
-    with cProfile.Profile() as pr:
-        # loading_mod()
-        preloaded_mod()
-
-    stats = pstats.Stats(pr)
-    stats.sort_stats(pstats.SortKey.TIME)
-    # stats.print_stats()
-    stats.dump_stats(filename='needs_profiling.prof')
-
-
-if __name__ == "__main__":
-    rclpy.init()
-    main()
+    def destroy(self):
+        """DummyModule does not inherit from a behavior with a destroy method, so self defining it
+        Does nothing...
+        """

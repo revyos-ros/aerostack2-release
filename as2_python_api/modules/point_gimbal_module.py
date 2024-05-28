@@ -1,8 +1,8 @@
 """
-test_module.py
+point_gimbal_module.py
 """
 
-# Copyright 2022 Universidad Politécnica de Madrid
+# Copyright 2024 Universidad Politécnica de Madrid
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -32,44 +32,55 @@ test_module.py
 
 
 __authors__ = "Pedro Arias Pérez"
-__copyright__ = "Copyright (c) 2022 Universidad Politécnica de Madrid"
+__copyright__ = "Copyright (c) 2024 Universidad Politécnica de Madrid"
 __license__ = "BSD-3-Clause"
-__version__ = "0.1.0"
 
-import typing
-import time
+
+from typing import TYPE_CHECKING
+
+from geometry_msgs.msg import Pose
 
 from as2_python_api.modules.module_base import ModuleBase
+from as2_python_api.behavior_actions.point_gimbal_behavior import PointGimbalBehavior
 
-if typing.TYPE_CHECKING:
+if TYPE_CHECKING:
     from ..drone_interface import DroneInterface
 
 
-class TestModule(ModuleBase):
-    """Test Module
+class PointGimbalModule(ModuleBase, PointGimbalBehavior):
+    """Point Gimbal Module
     """
-    __alias__ = "test"
+    __alias__ = "point_gimbal"
 
     def __init__(self, drone: 'DroneInterface') -> None:
         super().__init__(drone, self.__alias__)
-        self.stopped = False
 
-    def __call__(self, arg1: float, arg2: int, wait: bool = True) -> None:
-        """Test call
+    def __call__(self, _x: float, _y: float, _z: float, frame_id: str, wait: bool = False) -> None:
+        """Follow reference (m) with speed (m/s).
+
+        :type _x: float
+        :type _y: float
+        :type _z: float
+        :type frame_id: str
+        :type wait: bool
         """
-        if isinstance(wait, str):
-            wait = wait.lower() == 'true'
-        self.stopped = not wait
-        print(f"{self.__alias__} called with {arg1=}, {arg2=} and {wait=}")
-        while not self.stopped:
-            print(f"{self.__alias__} called with {arg1=}, {arg2=} and {wait=}")
-            time.sleep(0.5)
+        self.__point_gimbal(_x, _y, _z, frame_id, wait)
 
-    def stop(self):
-        """stop test module"""
-        self.stopped = True
+    def __point_gimbal(self, _x: float, _y: float, _z: float,
+                       frame_id: str, wait: bool = False) -> None:
+        msg = Pose()
+        msg.position.x = (float)(_x)
+        msg.position.y = (float)(_y)
+        msg.position.z = (float)(_z)
+        self.start(msg, frame_id, wait)
 
-    def destroy(self):
-        """TestModule does not inherit from a behavior with a destroy method, so self defining it
-        Does nothing...
+    # Method simplifications
+    def point_gimbal(self, _x: float, _y: float, _z: float, frame_id: str) -> None:
+        """Point Gimbal to reference (m).
+
+        :type _x: float
+        :type _y: float
+        :type _z: float
+        :type frame_id: str
         """
+        self.__point_gimbal(_x, _y, _z, frame_id)
