@@ -2,6 +2,20 @@
 Changelog for package as2_behaviors_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.9 (2024-03-25)
+------------------
+* Relative yaw in go_to fixed when frame is other than earth
+* Contributors: Javier Melero, Javilinos
+
+1.0.8 (2024-02-12)
+------------------
+
+1.0.7 (2024-02-04)
+------------------
+* [refactor] format tests according with ament_lint_common() packages
+* [refactor] add std::string() to topic names in order to be able to add a char*
+* Contributors: Miguel Fernandez-Cortizas, pariaspe
+
 1.0.6 (2023-12-12)
 ------------------
 * Takeoff and GoTo behavior renaming
