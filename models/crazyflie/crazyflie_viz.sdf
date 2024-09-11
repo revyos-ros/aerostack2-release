@@ -1,15 +1,4 @@
 <sdf version='1.6'>
-<!-- 
- ...........       ____  _ __
- |  ,-^-,  |      / __ )(_) /_______________ _____  ___
- | (  O  ) |     / __  / / __/ ___/ ___/ __ `/_  / / _ \
- | / ,..´  |    / /_/ / / /_/ /__/ /  / /_/ / / /_/  __/
-    +.......   /_____/_/\__/\___/_/   \__,_/ /___/\___/
- 
-MIT License
-
-Copyright (c) 2022 Bitcraze
--->
   <model name='crazyflie'>
     <pose>0 0 0 0 0 0</pose>
     <link name='base_link'>
@@ -39,10 +28,11 @@ Copyright (c) 2022 Bitcraze
         <geometry>
           <mesh>
             <scale>1 1.05 1</scale>
-            <uri>model://crazyflie/meshes/cf2_assembly.dae</uri>
+            <uri>package://as2_gazebo_assets/models/crazyflie/meshes/cf2_assembly.dae</uri>
           </mesh>
         </geometry>
       </visual>
+
     </link>
     <link name='m1'>
       <pose frame=''>0.031 -0.0325 0.022 0 0 0</pose>
@@ -80,7 +70,7 @@ Copyright (c) 2022 Bitcraze
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://crazyflie/meshes/ccw_prop.dae</uri>
+            <uri>package://as2_gazebo_assets/models/crazyflie/meshes/ccw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -139,7 +129,7 @@ Copyright (c) 2022 Bitcraze
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://crazyflie/meshes/ccw_prop.dae</uri>
+            <uri>package://as2_gazebo_assets/models/crazyflie/meshes/ccw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -198,7 +188,7 @@ Copyright (c) 2022 Bitcraze
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://crazyflie/meshes/cw_prop.dae</uri>
+            <uri>package://as2_gazebo_assets/models/crazyflie/meshes/cw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -257,7 +247,7 @@ Copyright (c) 2022 Bitcraze
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://crazyflie/meshes/cw_prop.dae</uri>
+            <uri>package://as2_gazebo_assets/models/crazyflie/meshes/cw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -280,99 +270,6 @@ Copyright (c) 2022 Bitcraze
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-
-    <!-- IMU -->
-    <model name='imu'>
-        <link name="internal">
-            <inertial>
-                <mass>0.005</mass>
-                <inertia>
-                    <ixx>8.33e-06</ixx>
-                    <ixy>0</ixy>
-                    <ixz>0</ixz>
-                    <iyy>8.33e-06</iyy>
-                    <iyz>0</iyz>
-                    <izz>8.33e-06</izz>
-                </inertia>
-            </inertial>
-            <sensor name='imu' type='imu'>
-                <always_on>1</always_on>
-                <update_rate>250</update_rate>
-                <imu>
-                    <angular_velocity>
-                        <x>
-                            <noise type='gaussian'>
-                                <mean>0</mean>
-                                <stddev>0.009</stddev>
-                                <bias_mean>0.00075</bias_mean>
-                                <bias_stddev>0.005</bias_stddev>
-                                <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
-                                <precision>0.00025</precision>
-                            </noise>
-                        </x>
-                        <y>
-                            <noise type='gaussian'>
-                                <mean>0</mean>
-                                <stddev>0.009</stddev>
-                                <bias_mean>0.00075</bias_mean>
-                                <bias_stddev>0.005</bias_stddev>
-                                <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
-                                <precision>0.00025</precision>
-                            </noise>
-                        </y>
-                        <z>
-                            <noise type='gaussian'>
-                                <mean>0</mean>
-                                <stddev>0.009</stddev>
-                                <bias_mean>0.00075</bias_mean>
-                                <bias_stddev>0.005</bias_stddev>
-                                <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
-                                <precision>0.00025</precision>
-                            </noise>
-                        </z>
-                    </angular_velocity>
-                    <linear_acceleration>
-                        <x>
-                            <noise type='gaussian'>
-                                <mean>0</mean>
-                                <stddev>0.021</stddev>
-                                <bias_mean>0.05</bias_mean>
-                                <bias_stddev>0.0075</bias_stddev>
-                                <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
-                                <precision>0.005</precision>
-                            </noise>
-                        </x>
-                        <y>
-                            <noise type='gaussian'>
-                                <mean>0</mean>
-                                <stddev>0.021</stddev>
-                                <bias_mean>0.05</bias_mean>
-                                <bias_stddev>0.0075</bias_stddev>
-                                <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
-                                <precision>0.005</precision>
-                            </noise>
-                        </y>
-                        <z>
-                            <noise type='gaussian'>
-                                <mean>0</mean>
-                                <stddev>0.021</stddev>
-                                <bias_mean>0.05</bias_mean>
-                                <bias_stddev>0.0075</bias_stddev>
-                                <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
-                                <precision>0.005</precision>
-                            </noise>
-                        </z>
-                    </linear_acceleration>
-                </imu>
-            </sensor>
-        </link>
-    </model>
 
   </model>
 </sdf>
