@@ -1,6 +1,4 @@
-"""
-object_bridges.py
-"""
+"""object_bridges.py."""
 
 # Copyright 2022 Universidad Politécnica de Madrid
 #
@@ -31,30 +29,40 @@ object_bridges.py
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-__authors__ = "Pedro Arias Pérez, Javier Melero Deza, Rafael Pérez Seguí"
-__copyright__ = "Copyright (c) 2022 Universidad Politécnica de Madrid"
-__license__ = "BSD-3-Clause"
-__version__ = "0.1.0"
+__authors__ = 'Pedro Arias Pérez, Javier Melero Deza, Rafael Pérez Seguí'
+__copyright__ = 'Copyright (c) 2022 Universidad Politécnica de Madrid'
+__license__ = 'BSD-3-Clause'
+__version__ = '0.1.0'
 
 import json
-from launch_ros.actions import Node
-from launch import LaunchDescription, LaunchContext
+
+from as2_gazebo_assets.utils.launch_exception import InvalidSimulationConfigFile
+from as2_gazebo_assets.world import World
+
+from launch import LaunchContext, LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch.substitutions import LaunchConfiguration
-
-from as2_gazebo_assets.world import World
+from launch_ros.actions import Node
+import yaml
 
 
 def object_bridges(context: LaunchContext):
-    """Return object bridges defined in config file.
-    """
+    """Return object bridges defined in config file."""
     config_file = LaunchConfiguration(
         'simulation_config_file').perform(context)
     use_sim_time = LaunchConfiguration('use_sim_time').perform(context)
     use_sim_time = use_sim_time.lower() in ['true', 't', 'yes', 'y', '1']
-    with open(config_file, 'r', encoding='utf-8') as stream:
-        config = json.load(stream)
-        world = World(**config)
+
+    # Check extension of config file
+    if config_file.endswith('.json'):
+        with open(config_file, 'r', encoding='utf-8') as stream:
+            config = json.load(stream)
+    elif config_file.endswith('.yaml') or config_file.endswith('.yml'):
+        with open(config_file, 'r', encoding='utf-8') as stream:
+            config = yaml.safe_load(stream)
+    else:
+        raise InvalidSimulationConfigFile('Invalid configuration file extension.')
+    world = World(**config)
 
     nodes = []
     for object_model in world.objects:
@@ -74,8 +82,7 @@ def object_bridges(context: LaunchContext):
 
 
 def generate_launch_description():
-    """Generate Launch description with object bridges
-    """
+    """Generate Launch description with object bridges."""
     return LaunchDescription([
         DeclareLaunchArgument(
             'simulation_config_file',
