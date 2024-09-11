@@ -1,6 +1,4 @@
-"""
-drone_bridges.py
-"""
+"""drone_bridges.py."""
 
 # Copyright 2022 Universidad Politécnica de Madrid
 #
@@ -31,23 +29,33 @@ drone_bridges.py
 # POSSIBILITY OF SUCH DAMAGE.
 
 import json
-from launch_ros.actions import Node
-from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, OpaqueFunction, LogInfo, Shutdown
-from launch.substitutions import LaunchConfiguration
 
+from as2_gazebo_assets.utils.launch_exception import InvalidSimulationConfigFile
 from as2_gazebo_assets.world import World
+
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, LogInfo, OpaqueFunction, Shutdown
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+import yaml
 
 
 def drone_bridges(context):
-    """Return drone bridges"""
+    """Return drone bridges."""
     namespace = LaunchConfiguration('namespace').perform(context)
     config_file = LaunchConfiguration(
         'simulation_config_file').perform(context)
 
-    with open(config_file, 'r', encoding='utf-8') as stream:
-        config = json.load(stream)
-        world = World(**config)
+    # Check extension of config file
+    if config_file.endswith('.json'):
+        with open(config_file, 'r', encoding='utf-8') as stream:
+            config = json.load(stream)
+    elif config_file.endswith('.yaml') or config_file.endswith('.yml'):
+        with open(config_file, 'r', encoding='utf-8') as stream:
+            config = yaml.safe_load(stream)
+    else:
+        raise InvalidSimulationConfigFile('Invalid configuration file extension.')
+    world = World(**config)
 
     nodes = []
     for drone_model in world.drones:
@@ -65,15 +73,14 @@ def drone_bridges(context):
 
     if not nodes:
         return [
-            LogInfo(msg="Gazebo Ignition bridge creation failed."),
-            LogInfo(msg=f"Drone ID: {namespace} not found in {config_file}."),
-            Shutdown(reason="Aborting..")]
+            LogInfo(msg='Gazebo Ignition bridge creation failed.'),
+            LogInfo(msg=f'Drone ID: {namespace} not found in {config_file}.'),
+            Shutdown(reason='Aborting..')]
     return nodes
 
 
 def generate_launch_description():
-    """Generate Launch description with world bridges
-    """
+    """Generate Launch description with world bridges."""
     return LaunchDescription([
         DeclareLaunchArgument(
             'simulation_config_file',
