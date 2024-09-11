@@ -1,3 +1,55 @@
+## aerostack2 (humble) - 1.1.2-1
+
+The packages in the `aerostack2` repository were released into the `humble` distro by running `/home/z572/gits/revyos-ros/venv/bin/bloom-release -r humble aerostack2 --override-release-repository-push-url git@github.com:revyos-ros/aerostack2-release.git` on `Wed, 11 Sep 2024 13:07:33 -0000`
+
+These packages were released:
+- `aerostack2`
+- `as2_alphanumeric_viewer`
+- `as2_behavior`
+- `as2_behavior_tree`
+- `as2_behaviors_motion`
+- `as2_behaviors_path_planning`
+- `as2_behaviors_perception`
+- `as2_behaviors_platform`
+- `as2_behaviors_trajectory_generation`
+- `as2_cli`
+- `as2_core`
+- `as2_external_object_to_tf`
+- `as2_gazebo_assets`
+- `as2_geozones`
+- `as2_keyboard_teleoperation`
+- `as2_map_server`
+- `as2_motion_controller`
+- `as2_motion_reference_handlers`
+- `as2_msgs`
+- `as2_platform_gazebo`
+- `as2_python_api`
+- `as2_realsense_interface`
+- `as2_rviz_plugins`
+- `as2_state_estimator`
+- `as2_usb_camera_interface`
+- `as2_visualization`
+
+These packages were explicitly ignored:
+- `as2_platform_multirotor_simulator`
+
+Version of package(s) in repository `aerostack2`:
+
+- upstream repository: https://github.com/aerostack2/aerostack2.git
+- release repository: https://github.com/revyos-ros/aerostack2-release.git
+- rosdistro version: `1.1.2-2`
+- old version: `1.0.9-3`
+- new version: `1.1.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## aerostack2 (humble) - 1.0.9-3
 
 The packages in the `aerostack2` repository were released into the `humble` distro by running `/usr/bin/bloom-release --override-release-repository-url=git@github.com:revyos-ros/aerostack2-release.git -r humble aerostack2` on `Tue, 28 May 2024 14:00:32 -0000`
