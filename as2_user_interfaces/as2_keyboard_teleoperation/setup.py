@@ -6,7 +6,7 @@ package_name = 'as2_keyboard_teleoperation'
 
 setup(
     name=package_name,
-    version='1.0.9',
+    version='1.1.2',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -26,6 +26,8 @@ setup(
          [package_name + '/localization_window.py']),
         ('share/' + package_name,
          [package_name + '/config_values.py']),
+        ('share/' + package_name + '/config',
+         ['config/teleop_values_config.yaml'])
     ],
     install_requires=['setuptools'],
     zip_safe=True,
