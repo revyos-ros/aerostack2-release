@@ -1,6 +1,4 @@
-"""
-launch_simulation.py
-"""
+"""launch_simulation.py."""
 
 # Copyright 2022 Universidad Politécnica de Madrid
 #
@@ -31,32 +29,36 @@ launch_simulation.py
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-__authors__ = "Pedro Arias Pérez, Javier Melero Deza, Rafael Pérez Seguí"
-__copyright__ = "Copyright (c) 2022 Universidad Politécnica de Madrid"
-__license__ = "BSD-3-Clause"
-__version__ = "0.1.0"
+__authors__ = 'Pedro Arias Pérez, Javier Melero Deza, Rafael Pérez Seguí'
+__copyright__ = 'Copyright (c) 2022 Universidad Politécnica de Madrid'
+__license__ = 'BSD-3-Clause'
+__version__ = '0.1.0'
 
-import os
 import json
+import os
+
 from typing import List
+
 from ament_index_python.packages import get_package_share_directory
-from launch_ros.actions import Node
-from launch import LaunchDescription, LaunchContext
+
+from as2_gazebo_assets.utils.launch_exception import InvalidSimulationConfigFile
+from as2_gazebo_assets.world import spawn_args, World
+
+from launch import LaunchContext, LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction, \
     RegisterEventHandler
+from launch.actions import EmitEvent, ExecuteProcess
 from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-from launch.actions import ExecuteProcess, EmitEvent
-from launch.events import Shutdown
-
-from as2_gazebo_assets.world import World, spawn_args
+from launch_ros.actions import Node
+import yaml
 
 
 def simulation(world_name: str, gui_config: str = '', headless: bool = False,
                verbose: bool = False, run_on_start: bool = True):
-    """Open Gazebo simulator
-    """
+    """Open Gazebo simulator."""
     gz_args = []
     if gui_config != '':
         gz_args.append(f'--gui-config {gui_config}')
@@ -105,7 +107,7 @@ def simulation(world_name: str, gui_config: str = '', headless: bool = False,
 
 
 def spawn(world: World) -> List[Node]:
-    """Spawn models (drones and objects) of world"""
+    """Spawn models (drones and objects) of world."""
     models = world.drones + world.objects
     launch_processes = []
     for model in models:
@@ -122,7 +124,11 @@ def spawn(world: World) -> List[Node]:
 
 
 def world_bridges():
-    """Create world bridges. Mainly clock if sim_time enabled."""
+    """
+    Create world bridges.
+
+    Mainly clock if sim_time enabled.
+    """
     world_bridges_ = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('as2_gazebo_assets'), 'launch'),
@@ -149,7 +155,9 @@ def object_bridges():
 
 
 def launch_simulation(context: LaunchContext):
-    """Return processes needed for launching the simulation.
+    """
+    Return processes needed for launching the simulation.
+
     Simulator + Spawning Models + Bridges.
     """
     config_file = LaunchConfiguration(
@@ -164,9 +172,16 @@ def launch_simulation(context: LaunchContext):
     run_on_start = LaunchConfiguration('run_on_start').perform(context)
     run_on_start = run_on_start.lower() in ['true', 't', 'yes', 'y', '1']
 
-    with open(config_file, 'r', encoding='utf-8') as stream:
-        config = json.load(stream)
-        world = World(**config)
+    # Check extension of config file
+    if config_file.endswith('.json'):
+        with open(config_file, 'r', encoding='utf-8') as stream:
+            config = json.load(stream)
+    elif config_file.endswith('.yaml') or config_file.endswith('.yml'):
+        with open(config_file, 'r', encoding='utf-8') as stream:
+            config = yaml.safe_load(stream)
+    else:
+        raise InvalidSimulationConfigFile('Invalid configuration file extension.')
+    world = World(**config)
 
     launch_processes = []
     # If there is a world file created by jinja we use that one,
@@ -181,8 +196,7 @@ def launch_simulation(context: LaunchContext):
 
 
 def generate_launch_description():
-    """Generate Launch description with GzSim launch + Models Spawning + World/Object bridges
-    """
+    """Generate Launch description with GzSim launch + Models Spawning + World/Object bridges."""
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
