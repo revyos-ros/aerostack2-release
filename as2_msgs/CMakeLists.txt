@@ -19,6 +19,7 @@ set(PROJECT_DEPENDENCIES
   builtin_interfaces
   nav_msgs
   action_msgs
+  sensor_msgs
 )
 
 foreach(DEPENDENCY ${PROJECT_DEPENDENCIES})
@@ -45,6 +46,8 @@ set(MSGS_FILES
   "msg/BehaviorStatus.msg"
   "msg/YawMode.msg"
   "msg/GimbalControl.msg"
+  "msg/Geozone.msg"
+  "msg/PolygonList.msg"
 )
 
 set(SRVS_FILES
@@ -60,6 +63,10 @@ set(SRVS_FILES
   "srv/SetOrigin.srv"
   "srv/SetPlatformStateMachineEvent.srv"
   "srv/SetSpeed.srv"
+  "srv/AddStaticTransform.srv"
+  "srv/AddStaticTransformGps.srv"
+  "srv/GetGeozone.srv"
+  "srv/SetGeozone.srv"
 )
 
 set(ACTION_FILES
@@ -73,6 +80,7 @@ set(ACTION_FILES
   "action/SetOffboardMode.action"
   "action/FollowReference.action"
   "action/PointGimbal.action"
+  "action/NavigateToPoint.action"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -81,5 +89,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   ${ACTION_FILES}
   DEPENDENCIES ${PROJECT_DEPENDENCIES}
 )
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_lint_cmake REQUIRED)
+  ament_lint_cmake()
+  find_package(ament_cmake_xmllint REQUIRED)
+  ament_xmllint()
+endif()
 
 ament_package()
