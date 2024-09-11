@@ -1,0 +1,92 @@
+ros-humble-as2-rviz-plugins (1.1.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Wed, 21 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.1.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Mon, 19 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.1.0-1bookworm) bookworm; urgency=high
+
+  * [as2_user_interfaces] add as2_rviz_plugins package
+  * Contributors: Javilinos, Rafael Pérez, pariaspe
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Wed, 07 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.9-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Sun, 24 Mar 2024 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.8-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Sun, 11 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.7-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Sat, 03 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.6-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Mon, 11 Dec 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.5-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Tue, 07 Nov 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.4-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Tue, 22 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.3-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Mon, 21 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Wed, 16 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Mon, 24 Apr 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (1.0.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Fri, 17 Mar 2023 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (0.2.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Wed, 21 Dec 2022 16:00:00 -0000
+
+ros-humble-as2-rviz-plugins (0.2.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Mabel Zhang <mabel@openrobotics.org>  Sun, 18 Dec 2022 16:00:00 -0000
+
+
