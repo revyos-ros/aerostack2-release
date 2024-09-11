@@ -1,0 +1,109 @@
+ros-humble-as2-cli (1.1.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 21 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-cli (1.1.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 19 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-cli (1.1.0-1bookworm) bookworm; urgency=high
+
+  * [as2_cli] improvement in as2_list and as2_test
+  * Contributors: Miguel Fernandez-Cortizas, Rafael Perez-Segui
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 07 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.9-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 24 Mar 2024 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.8-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 11 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.7-1bookworm) bookworm; urgency=high
+
+  * Clean old unused files
+  * Contributors: Rafael Pérez, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sat, 03 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.6-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 11 Dec 2023 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.5-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 07 Nov 2023 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.4-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 22 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.3-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 21 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 16 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.1-1bookworm) bookworm; urgency=high
+
+  * Merge pull request #223 <https://github.com/aerostack2/aerostack2/issues/223> from aerostack2/200-unify-maintainer-in-packagexmls
+    Maintainer unified to CVAR-UPM
+  * Maintainer unified to CVAR-UPM
+  * Contributors: Miguel Fernandez-Cortizas, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 24 Apr 2023 16:00:00 -0000
+
+ros-humble-as2-cli (1.0.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Fri, 17 Mar 2023 16:00:00 -0000
+
+ros-humble-as2-cli (0.2.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 19 Dec 2022 16:00:00 -0000
+
+ros-humble-as2-cli (0.2.1-1bookworm) bookworm; urgency=high
+
+  * Merge pull request #17 <https://github.com/aerostack2/aerostack2/issues/17> from aerostack2/improve_cli
+    added verbose mode to as2 test
+  * added verbose mode to as2 test
+  * Merge pull request #15 <https://github.com/aerostack2/aerostack2/issues/15> from aerostack2/pkg_dependencies
+    Pkg dependencies
+  * Update pkg dependencies
+  * Merge pull request #14 <https://github.com/aerostack2/aerostack2/issues/14> from aerostack2/improve_cli
+    Improve cli
+  * echo removed
+  * remove stack folder references
+  * allow cd without as2_ prefix
+  * as2_cli adapted to new repo
+  * First commit
+  * Contributors: Miguel, Miguel Fernandez-Cortizas, RPS98, Rafael Pérez, miferco97, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 18 Dec 2022 16:00:00 -0000
+
+
