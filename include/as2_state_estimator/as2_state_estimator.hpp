@@ -27,9 +27,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 /**
-* @file mocap_pose.cpp
+* @file as2_state_estimator.hpp
 *
-* An state estimation plugin mocap_pose for AeroStack2 implementation
+* An state estimation server for AeroStack2
 *
 * @authors David Pérez Saura
 *          Rafael Pérez Seguí
@@ -38,7 +38,53 @@
 *          Pedro Arias Pérez
 */
 
+#ifndef AS2_STATE_ESTIMATOR__AS2_STATE_ESTIMATOR_HPP_
+#define AS2_STATE_ESTIMATOR__AS2_STATE_ESTIMATOR_HPP_
 
-#include "mocap_pose.hpp"
-#include <pluginlib/class_list_macros.hpp>
-PLUGINLIB_EXPORT_CLASS(mocap_pose::Plugin, as2_state_estimator_plugin_base::StateEstimatorBase)
+#include <tf2_ros/buffer.h>
+#include <tf2_ros/static_transform_broadcaster.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <tf2_ros/transform_listener.h>
+#include <filesystem>
+#include <memory>
+#include <pluginlib/class_loader.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/twist_stamped.hpp>
+#include <nav_msgs/msg/odometry.hpp>
+
+#include <as2_core/names/topics.hpp>
+#include <as2_core/node.hpp>
+#include <as2_core/utils/frame_utils.hpp>
+#include <as2_core/utils/tf_utils.hpp>
+
+#include "plugin_base.hpp"
+
+namespace as2_state_estimator
+{
+
+class StateEstimator : public as2::Node
+{
+public:
+  explicit StateEstimator(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  ~StateEstimator() {}
+
+private:
+  std::filesystem::path plugin_name_;
+  std::shared_ptr<pluginlib::ClassLoader<as2_state_estimator_plugin_base::StateEstimatorBase>>
+  loader_;
+  std::shared_ptr<as2_state_estimator_plugin_base::StateEstimatorBase> plugin_ptr_;
+  std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+  std::shared_ptr<tf2_ros::StaticTransformBroadcaster> tfstatic_broadcaster_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
+
+private:
+  /**
+   * @brief Modify the node options to allow undeclared parameters
+   */
+  static rclcpp::NodeOptions get_modified_options(const rclcpp::NodeOptions & options);
+};  // class StateEstimator
+}  // namespace as2_state_estimator
+
+#endif  // AS2_STATE_ESTIMATOR__AS2_STATE_ESTIMATOR_HPP_

@@ -27,9 +27,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 /**
-* @file mocap_pose.cpp
+* @file as2_state_estimator_node.cpp
 *
-* An state estimation plugin mocap_pose for AeroStack2 implementation
+* Node for the state estimation server for AeroStack2
 *
 * @authors David Pérez Saura
 *          Rafael Pérez Seguí
@@ -38,7 +38,15 @@
 *          Pedro Arias Pérez
 */
 
+#include <rclcpp/executors.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include "as2_state_estimator.hpp"
 
-#include "mocap_pose.hpp"
-#include <pluginlib/class_list_macros.hpp>
-PLUGINLIB_EXPORT_CLASS(mocap_pose::Plugin, as2_state_estimator_plugin_base::StateEstimatorBase)
+int main(int argc, char ** argv)
+{
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<as2_state_estimator::StateEstimator>();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+  return 0;
+}
