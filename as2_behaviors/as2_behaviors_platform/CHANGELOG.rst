@@ -2,6 +2,18 @@
 Changelog for package as2_behaviors_platform
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.2 (2024-08-22)
+------------------
+
+1.1.1 (2024-08-20)
+------------------
+
+1.1.0 (2024-08-08)
+------------------
+* [as2_behaviors_platform] as2_behaviors_platform passing ament tests
+* [as2_behaviors_platform] Fix warning about service client access
+* Contributors: Javilinos, Miguel Fernandez-Cortizas, Rafael Perez-Segui
+
 1.0.9 (2024-03-25)
 ------------------
 
