@@ -2,6 +2,18 @@
 Changelog for package as2_alphanumeric_viewer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.2 (2024-08-22)
+------------------
+
+1.1.1 (2024-08-20)
+------------------
+
+1.1.0 (2024-08-08)
+------------------
+* [as2_alphanumeric_viewer] Battery status problem fixed
+* [as2_alphanumeric_viewer] alphanumeric viewer passing every ament test
+* Contributors: Javilinos, Miguel Fernandez-Cortizas, Rafael Perez-Segui
+
 1.0.9 (2024-03-25)
 ------------------
 
