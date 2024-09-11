@@ -1,0 +1,93 @@
+ros-humble-as2-behaviors-path-planning (1.1.2-1bookworm) bookworm; urgency=high
+
+  * Remove backward_ros dependency
+  * Contributors: Miguel Fernandez-Cortizas, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 21 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.1.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 19 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.1.0-1bookworm) bookworm; urgency=high
+
+  * [as2_behaviors_path_planning] New behavior for navigation with basic a_star plugin working
+  * Contributors: Miguel Fernandez-Cortizas, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 07 Aug 2024 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.9-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 24 Mar 2024 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.8-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 11 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.7-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sat, 03 Feb 2024 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.6-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 11 Dec 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.5-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 07 Nov 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.4-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 22 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.3-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 21 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 16 Aug 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 24 Apr 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (1.0.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Fri, 17 Mar 2023 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (0.2.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 21 Dec 2022 16:00:00 -0000
+
+ros-humble-as2-behaviors-path-planning (0.2.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 18 Dec 2022 16:00:00 -0000
+
+
