@@ -28,16 +28,17 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-__authors__ = "Javier Melero Deza, Pedro Arias Pérez"
-__copyright__ = "Copyright (c) 2022 Universidad Politécnica de Madrid"
-__license__ = "BSD-3-Clause"
-__version__ = "0.1.0"
+__authors__ = 'Javier Melero Deza, Pedro Arias Pérez'
+__copyright__ = 'Copyright (c) 2022 Universidad Politécnica de Madrid'
+__license__ = 'BSD-3-Clause'
+__version__ = '0.1.0'
 
 import threading
 from typing import List
-from as2_python_api.drone_interface_teleop import DroneInterfaceTeleop as DroneInterface
+
 from as2_keyboard_teleoperation.config_values import KeyMappings
 from as2_keyboard_teleoperation.config_values import Options
+from as2_python_api.drone_interface_teleop import DroneInterfaceTeleop as DroneInterface
 
 
 class DroneManager:
@@ -53,6 +54,7 @@ class DroneManager:
                                       KeyMappings.LAND_KEY.value: self.land,
                                       KeyMappings.HOVER_KEY.value: self.hover,
                                       KeyMappings.EMERGENCY_KEY.value: self.emergency_stop}
+        self.reference_cleared = False
 
     def manage_common_behaviors(self, key):
         """
@@ -144,6 +146,19 @@ class DroneManager:
                     self.execute_function(
                         self.move_at_speed, (self.uav_list[index],
                                              lineal, value_list[2],))
+
+        if key is None:
+            if not self.reference_cleared:
+                for index, drone_id in enumerate(self.drone_id_list):
+                    if drone_id[1]:
+
+                        lineal = [0.0, 0.0, 0.0]
+                        self.execute_function(
+                            self.move_at_speed, (self.uav_list[index],
+                                                 lineal, 0.0,))
+                self.reference_cleared = True
+        else:
+            self.reference_cleared = False
 
     def manage_pose_behaviors(self, key, value_list):
         """
@@ -293,18 +308,26 @@ class DroneManager:
 
     def hover(self, uav: DroneInterface):
         """Hover."""
+        # uav.motion_ref_handler.speed.send_speed_command_with_yaw_speed(
+        #     [0.0, 0.0, 0.0], self.twist_frame_id, 0.0)
         uav.motion_ref_handler.hover()
 
     def move_at_speed(self, uav: DroneInterface, lineal, yaw_speed):
         """Move at speed."""
+        frame_id = 'earth'
+        if 'base_link' in self.twist_frame_id:
+            frame_id = uav.get_namespace().replace('/', '') + '/base_link'
         uav.motion_ref_handler.speed.send_speed_command_with_yaw_speed(
-            lineal, self.twist_frame_id, yaw_speed)
+            lineal, frame_id, yaw_speed)
 
     def go_to_pose(self, uav: DroneInterface, position, orientation):
         """Go to pose."""
+        frame_id = 'earth'
+        if 'base_link' in self.pose_frame_id:
+            frame_id = uav.get_namespace().replace('/', '') + '/base_link'
         uav.motion_ref_handler.position.send_position_command_with_yaw_angle(
-            position, None, self.pose_frame_id,
-            self.twist_frame_id, orientation)
+            position, None, frame_id,
+            'earth', orientation)
 
     def emergency_stop(self, uav: DroneInterface):
         """Emergency stop."""
