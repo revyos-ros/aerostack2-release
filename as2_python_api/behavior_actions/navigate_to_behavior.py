@@ -1,8 +1,8 @@
-"""FollowReference Behavior."""
+"""Navigate To Behavior."""
 
 from __future__ import annotations
 
-# Copyright 2022 Universidad Politécnica de Madrid
+# Copyright 2024 Universidad Politécnica de Madrid
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -31,14 +31,13 @@ from __future__ import annotations
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-__authors__ = 'Miguel Fernández Cortizas, Pedro Arias Pérez, David Pérez Saura, Rafael Pérez Seguí, \
-    Javier Melero Deza'
-__copyright__ = 'Copyright (c) 2022 Universidad Politécnica de Madrid'
+__authors__ = 'Pedro Arias Pérez'
+__copyright__ = 'Copyright (c) 2024 Universidad Politécnica de Madrid'
 __license__ = 'BSD-3-Clause'
 
 import typing
 
-from as2_msgs.action import FollowReference
+from as2_msgs.action import NavigateToPoint
 from as2_python_api.behavior_actions.behavior_handler import BehaviorHandler
 from geometry_msgs.msg import Pose, PoseStamped
 
@@ -46,65 +45,44 @@ if typing.TYPE_CHECKING:
     from ..drone_interface_base import DroneInterfaceBase
 
 
-class FollowReferenceBehavior(BehaviorHandler):
-    """FollowReference Behavior."""
+class NavigateToBehavior(BehaviorHandler):
+    """Navigate To Behavior class."""
 
     def __init__(self, drone: 'DroneInterfaceBase') -> None:
         self.__drone = drone
 
         try:
-            super().__init__(drone, FollowReference, 'FollowReferenceBehavior')
+            super().__init__(drone, NavigateToPoint, 'path_planner')
         except self.BehaviorNotAvailable as err:
             self.__drone.get_logger().warn(str(err))
 
-    def start(self, pose: tuple[Pose, PoseStamped], frame_id: str,
-              speed_x: float, speed_y: float, speed_z: float, yaw_mode: int,
-              yaw_angle: float, wait_result: bool = False) -> bool:
-        """Start FollowReference behavior."""
-        goal_msg = FollowReference.Goal()
-        pose_stamped = self.__get_pose(pose)
-        goal_msg.target_pose.header.stamp = self.__drone.get_clock().now().to_msg()
-        goal_msg.target_pose.header.frame_id = frame_id
-        goal_msg.target_pose.point.x = pose_stamped.position.x
-        goal_msg.target_pose.point.y = pose_stamped.position.y
-        goal_msg.target_pose.point.z = pose_stamped.position.z
-
-        goal_msg.max_speed_x = speed_x
-        goal_msg.max_speed_y = speed_y
-        goal_msg.max_speed_z = speed_z
-
+    def start(self, pose: Pose | PoseStamped, speed: float, yaw_mode: int, yaw_angle: float,
+              frame_id: str = 'earth', wait_result: bool = True) -> bool:
+        goal_msg = NavigateToPoint.Goal()
+        goal_msg.point.header.stamp = self.__drone.get_clock().now().to_msg()
+        goal_msg.point.header.frame_id = frame_id
+        pose_ = self.__get_pose(pose)
+        goal_msg.point.point = pose_.position
+        goal_msg.navigation_speed = speed
         goal_msg.yaw.mode = yaw_mode
         if yaw_angle:
             goal_msg.yaw.angle = yaw_angle
+        return super().start(goal_msg, wait_result)
 
-        try:
-            return super().start(goal_msg, wait_result)
-        except self.GoalRejected as err:
-            self.__drone.get_logger().warn(str(err))
-        return False
-
-    def modify(self, pose: tuple[Pose, PoseStamped], frame_id: str,
-               speed_x: float, speed_y: float, speed_z: float, yaw_mode: int,
-               yaw_angle: float):
-        """Modify FollowReference behavior."""
-        goal_msg = FollowReference.Goal()
-        pose_stamped = self.__get_pose(pose)
-        goal_msg.target_pose.header.stamp = self.__drone.get_clock().now().to_msg()
-        goal_msg.target_pose.header.frame_id = frame_id  # TODO
-        goal_msg.target_pose.point.x = pose_stamped.position.x
-        goal_msg.target_pose.point.y = pose_stamped.position.y
-        goal_msg.target_pose.point.z = pose_stamped.position.z
-
-        goal_msg.max_speed_x = speed_x
-        goal_msg.max_speed_y = speed_y
-        goal_msg.max_speed_z = speed_z
-
+    def modify(self, pose: Pose | PoseStamped, speed: float, yaw_mode: int, yaw_angle: float,
+               frame_id: str = 'earth'):
+        goal_msg = NavigateToPoint.Goal()
+        goal_msg.point.header.stamp = self.__drone.get_clock().now().to_msg()
+        goal_msg.point.header.frame_id = frame_id
+        pose_ = self.__get_pose(pose)
+        goal_msg.point.point = pose_.position
+        goal_msg.navigation_speed = speed
         goal_msg.yaw.mode = yaw_mode
         if yaw_angle:
             goal_msg.yaw.angle = yaw_angle
         return super().modify(goal_msg)
 
-    def __get_pose(self, pose: tuple[Pose, PoseStamped]):
+    def __get_pose(self, pose: Pose | PoseStamped) -> Pose:
         """Get pose msg."""
         if isinstance(pose, Pose):
             return pose
