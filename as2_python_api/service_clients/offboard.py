@@ -1,4 +1,4 @@
-"""Offboard service handler"""
+"""Offboard service handler."""
 
 # Copyright 2022 Universidad Politécnica de Madrid
 #
@@ -29,34 +29,35 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-__authors__ = "Miguel Fernández Cortizas, Pedro Arias Pérez, David Pérez Saura, Rafael Pérez Seguí"
-__copyright__ = "Copyright (c) 2022 Universidad Politécnica de Madrid"
-__license__ = "BSD-3-Clause"
-__version__ = "0.1.0"
+__authors__ = 'Miguel Fernández Cortizas, Pedro Arias Pérez, David Pérez Saura, Rafael Pérez Seguí'
+__copyright__ = 'Copyright (c) 2022 Universidad Politécnica de Madrid'
+__license__ = 'BSD-3-Clause'
 
 import typing
-from time import sleep
-from std_srvs.srv import SetBool
 
-from ..service_clients.service_handler import ServiceHandler
+from ..service_clients.service_handler import ServiceBoolHandler
 
 if typing.TYPE_CHECKING:
     from ..drone_interface_base import DroneInterfaceBase
 
 
-class Offboard(ServiceHandler):
-    """Offboard service handler"""
+class Offboard(ServiceBoolHandler):
+    """Offboard service handler class."""
 
-    def __init__(self, drone: 'DroneInterfaceBase', value: bool = True) -> None:
+    def __init__(self, drone: 'DroneInterfaceBase') -> None:
+        super().__init__(drone, 'set_offboard_mode')
 
-        self._service_client = drone.create_client(
-            SetBool, 'set_offboard_mode')
+    def __call__(self) -> bool:
+        """Call the offboard service."""
+        return super().__call__(True)
 
-        request = SetBool.Request()
-        request.data = value
-        sleep(0.5)
 
-        try:
-            super().__init__(self._service_client, request, drone.get_logger())
-        except self.ServiceNotAvailable as err:
-            drone.get_logger().error(str(err))
+class Manual(ServiceBoolHandler):
+    """Manual (offboard) service handler class."""
+
+    def __init__(self, drone: 'DroneInterfaceBase') -> None:
+        super().__init__(drone, 'set_offboard_mode')
+
+    def __call__(self) -> bool:
+        """Call the offboard service."""
+        return super().__call__(False)
