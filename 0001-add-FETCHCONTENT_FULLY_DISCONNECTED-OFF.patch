@@ -1,0 +1,24 @@
+From 8f8b6b19bab256a2e2949fe41831f731eb7f9980 Mon Sep 17 00:00:00 2001
+From: Zheng Junjie <z572@z572.online>
+Date: Mon, 17 Mar 2025 12:11:41 +0800
+Subject: [PATCH] add FETCHCONTENT_FULLY_DISCONNECTED=OFF.
+
+---
+ debian/rules.em | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/debian/rules.em b/debian/rules.em
+index a856369d..9e15949a 100755
+--- a/debian/rules.em
++++ b/debian/rules.em
+@@ -35,6 +35,7 @@ override_dh_auto_configure:
+ 		-DCMAKE_INSTALL_PREFIX="@(InstallationPrefix)" \
+ 		-DAMENT_PREFIX_PATH="@(InstallationPrefix)" \
+ 		-DCMAKE_PREFIX_PATH="@(InstallationPrefix)" \
++		-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF  \
+ 		$(BUILD_TESTING_ARG)
+ 
+ override_dh_auto_build:
+-- 
+2.48.1
+
