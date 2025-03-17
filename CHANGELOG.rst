@@ -2,6 +2,19 @@
 Changelog for package as2_behaviors_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.2 (2024-08-22)
+------------------
+
+1.1.1 (2024-08-20)
+------------------
+
+1.1.0 (2024-08-08)
+------------------
+* [as2_behaviors_motion] Not overwritting behavior config file if user config file is empty
+* [as2_behaviors_motion] Update to ament lint auto and use as2_core launch param utils
+* [as2_behaviors_motion] Fix warning about service client access
+* Contributors: Miguel Fernandez-Cortizas, Rafael Perez-Segui, pariaspe
+
 1.0.9 (2024-03-25)
 ------------------
 * Relative yaw in go_to fixed when frame is other than earth
