@@ -1,0 +1,93 @@
+ros-humble-as2-geozones (1.1.2-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Thu, 22 Aug 2024 00:00:00 -0000
+
+ros-humble-as2-geozones (1.1.1-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Tue, 20 Aug 2024 00:00:00 -0000
+
+ros-humble-as2-geozones (1.1.0-2jammy) jammy; urgency=high
+
+  * [as2_geozones] as2 geozones intefaces moved to Aerostack2 interfaces package
+  * [as2_geozones] Create a utilities package, as2_geozones added
+  * Contributors: Javilinos, Miguel Fernandez-Cortizas
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Thu, 08 Aug 2024 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.9-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Mon, 25 Mar 2024 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.8-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Mon, 12 Feb 2024 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.7-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Sun, 04 Feb 2024 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.6-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Tue, 12 Dec 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.5-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Wed, 08 Nov 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.4-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Wed, 23 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.3-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Tue, 22 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.2-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Thu, 17 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.1-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Tue, 25 Apr 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (1.0.0-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Sat, 18 Mar 2023 00:00:00 -0000
+
+ros-humble-as2-geozones (0.2.2-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Thu, 22 Dec 2022 00:00:00 -0000
+
+ros-humble-as2-geozones (0.2.1-2jammy) jammy; urgency=high
+
+
+
+ -- Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>  Mon, 19 Dec 2022 00:00:00 -0000
+
+
