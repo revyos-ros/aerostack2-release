@@ -1,0 +1,12 @@
+Source: ros-humble-as2-rviz-plugins
+Section: misc
+Priority: optional
+Maintainer: Mabel Zhang <mabel@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), qtbase5-dev, ros-humble-ament-cmake, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-as2-core, ros-humble-as2-motion-reference-handlers, ros-humble-as2-msgs, ros-humble-geometry-msgs, ros-humble-rclcpp, ros-humble-rviz-common, ros-humble-rviz-rendering, ros-humble-sensor-msgs, ros-humble-ros-workspace
+Homepage: http://ros.org/wiki/rviz_plugin_tutorials
+Standards-Version: 3.9.2
+
+Package: ros-humble-as2-rviz-plugins
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5core5a, libqt5gui5, libqt5widgets5, ros-humble-as2-core, ros-humble-as2-motion-reference-handlers, ros-humble-as2-msgs, ros-humble-geometry-msgs, ros-humble-rclcpp, ros-humble-rviz-common, ros-humble-rviz-rendering, ros-humble-sensor-msgs, ros-humble-ros-workspace
+Description: Tutorials showing how to write plugins for RViz.
