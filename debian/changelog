@@ -1,0 +1,108 @@
+ros-humble-as2-platform-crazyflie (1.0.9-2bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 25 Mar 2024 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.8-2bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 12 Feb 2024 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.7-2bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 04 Feb 2024 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.6-2bookworm) bookworm; urgency=high
+
+  * Fix wrong sensor name for multiranger deck
+  * Contributors: Rafael Pérez, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 12 Dec 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.5-2bookworm) bookworm; urgency=high
+
+  * Multi-ranger deck interface to laser_scan msg
+  * Contributors: pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 08 Nov 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.4-2bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 23 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.3-2bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 22 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.2-2bookworm) bookworm; urgency=high
+
+  * Merge pull request #239 <https://github.com/aerostack2/aerostack2/issues/239> from aerostack2/cf-namespace
+    [as2_crazyflie_platform] Remove namespace from launch
+  * Fix aideck config file in launcher
+  * Remove namespace from launch
+    Namespace was overriding each crazyflie namespace which is intended to be set by swarm_config_file
+  * Merge pull request #237 <https://github.com/aerostack2/aerostack2/issues/237> from aerostack2/unify_platform_launchers
+    Unify launchers
+  * Fix crazyflie params file read
+  * Unify platform launchers
+  * Contributors: Javilinos, Miguel Fernandez-Cortizas, RPS98, Rafael Pérez, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Thu, 17 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.1-2bookworm) bookworm; urgency=high
+
+  * Merge pull request #223 <https://github.com/aerostack2/aerostack2/issues/223> from aerostack2/200-unify-maintainer-in-packagexmls
+    Maintainer unified to CVAR-UPM
+  * Maintainer unified to CVAR-UPM
+  * Merge pull request #212 <https://github.com/aerostack2/aerostack2/issues/212> from aerostack2/211-nodes-should-use-aerostack2-node-create-timer-method-not-create-wall-timer
+    Nodes use Aerostack2 Node Create Timer method, not create wall timer
+  * Change create wall timer to as2 create timer
+  * Contributors: Miguel Fernandez-Cortizas, RPS98, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 25 Apr 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (1.0.0-2bookworm) bookworm; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sat, 18 Mar 2023 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (0.2.2-2bookworm) bookworm; urgency=high
+
+  * Merge pull request #88 <https://github.com/aerostack2/aerostack2/issues/88> from aerostack2/main
+    update with main
+  * Merge pull request #85 <https://github.com/aerostack2/aerostack2/issues/85> from aerostack2/as2_movement_behaviors_rename
+    rename movement_behavior to as2_movement_behaviors
+  * reformat
+  * Contributors: Miguel, Miguel Fernandez-Cortizas, Rafael Pérez
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 20 Dec 2022 00:00:00 -0000
+
+ros-humble-as2-platform-crazyflie (0.2.1-2bookworm) bookworm; urgency=high
+
+  * Merge pull request #84 <https://github.com/aerostack2/aerostack2/issues/84> from aerostack2/clang-test-fixing
+    [CI] Clang format fixed
+  * clang format
+  * Merge pull request #32 <https://github.com/aerostack2/aerostack2/issues/32> from aerostack2/main
+    update_branch_before_merging
+  * Merge pull request #28 <https://github.com/aerostack2/aerostack2/issues/28> from aerostack2/cf_launcher
+    Update package and node name
+  * Update package and node name
+  * Merge pull request #15 <https://github.com/aerostack2/aerostack2/issues/15> from aerostack2/pkg_dependencies
+    Pkg dependencies
+  * Update pkg dependencies
+  * px4 extended and ci actions
+  * as2 added to platforms
+  * Contributors: Miguel Fernandez-Cortizas, RPS98, miferco97, pariaspe
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 19 Dec 2022 00:00:00 -0000
+
+
