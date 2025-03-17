@@ -1,3 +1,3 @@
-Any contribution that you make to this repository will
-be under the 3-Clause BSD License, as dictated by that
-[license](https://opensource.org/licenses/BSD-3-Clause).
+# Contributing to AeroStack2
+
+Thanks for getting involved! Information on contributing can be found at [https://aerostack2.github.io/contributing](https://aerostack2.github.io/contributing)
