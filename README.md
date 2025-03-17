@@ -1,68 +1,39 @@
-# as2_python_api
+[![arXiv](https://img.shields.io/badge/arXiv-2303.18237-b31b1b.svg)](https://arxiv.org/abs/2303.18237) [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) [![Build Status ROS2 Package](https://build.ros2.org/job/Hbin_uJ64__aerostack2__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__aerostack2__ubuntu_jammy_amd64__binary/) [![codecov_test](https://github.com/aerostack2/aerostack2/actions/workflows/codecov_test.yaml/badge.svg)](https://github.com/aerostack2/aerostack2/actions/workflows/codecov_test.yaml)
 
-AeroStack2 python interface.
+# Aerostack2
 
-## Index
-- [API](#api)
-- [ENUMERATIONS](#enumerations)
-    - [STATE](#state)
-    - [YAW_MODE](#yawmode)
-    - [CONTROL_MODE](#controlmode)
-    - [REFERENCE_FRAME](#referenceframe)
+Aerostack2 is a ROS 2 framework developed to create autonomous multi-aerial-robots systems in an easy and powerful way.
 
-----
-## API
+![Build for Ubuntu 22.04 and ROS humble](https://github.com/aerostack2/aerostack2/actions/workflows/build-humble.yaml/badge.svg) 
 
-| Method | Input | Output | Description |
-| --- | --- | --- | --- |
-| `str = get_drone_id()` | - | drone namespace | - |
-| `{ bool, bool, bool, STATE, YAW_MODE, CONTROL_MODE, REFERENCE_FRAME } = get_info()` | - | drone info {connected, armed, offboard, state, yaw_mode, control_mode, reference_frame} | - |
-| `[ float, float, float ] = get_position()` | - | [ x, y, z ] | - |
-| `[ float, float, float ] = get orientation()` | - | [ roll, pitch, yaw ] | - |
-| `[ float, float, float ] = get_gps_pose()` | - | [ lat, lon ,alt ] |
-| `takeoff(float, float)` | heigth, speed | - | - |
-| `follow_path([ [ float, float, float ], ... ], float)` | [ [ x, y, z ], ... ], speed | - | - |
-| `follow_gps_path([ [ float, float, float ], ... ], float)` | [ [ lat, lon, alt ], ... ], speed | - | - |
-| `land()` | - | - | - |
-<!-- | `go_to()` | - | - | -->
+Currently is currently developed and tested over ROS 2 humble (over Ubuntu 22.04) .
 
-----
-## ENUMERATIONS
+Versions below 1.0.9 were also developed and tested over ROS 2 galactic (over Ubuntu 20.04), can be found in the branch `EOL/galactic`.
 
-### STATE
+We also have docker images with Aerostack2 preinstalled in ROS 2 Humble, check it out at [Aerostack2 Dockerhub](https://hub.docker.com/u/aerostack2).
 
-| Value | Field Name | Description |
-| --- | --- | --- |
-| `EMERGENCY` | -1 | - |
-| `DISARMED` | 0 | - |
-| `LANDED` | 1 | - |
-| `TAKING_OFF` | 2 | - |
-| `FLYING` | 3 | - |
-| `LANDING` | 4 | - |
 
-### YAW_MODE
+Most important features:
+- Natively developed on ROS 2.
+- Complete modularity, allowing elements to be changed or interchanged without affecting the rest of the system.
+- Independence of the aerial platform. Easy Sim2Real deployment.
+- Project-oriented, allowing to install and use only the necessary packages for the application to be developed. 
+- Swarming orientation.
 
-| Value | Field Name | Description |
-| --- | --- | --- |
-| `YAW_ANGLE` | 0 | - |
-| `YAW_SPEED` | 1 | - |
+Please visit the [[Aerostack2 Documentation]](https://aerostack2.github.io) for a complete documentation.
 
-### CONTROL_MODE
+Installation instructions can be found [[here]](https://aerostack2.github.io/_00_getting_started/index.html#ubuntu-debian).
 
-| Value | Field Name | Description |
-| --- | --- | --- |
-| `UNSET` | -1 | mode when the vehicle is not set |
-| `POSITION_MODE` | 0 | x, y, z refs |
-| `SPEED_MODE` | 1 | vx, vy, vz refs |
-| `SPEED_IN_A_PLANE` | 2 | vx, vy, z refs |
-| `ACCEL_MODE` | 3 | ax, ay, az refs |
-| `ATTITUDE_MODE` | 4 | quaternions + Thrust  |
-| `ACRO_MODE` | 5 | p, q, r speed + Thrust  |
+<br />
 
-### REFERENCE_FRAME
+https://user-images.githubusercontent.com/35956525/231999883-e491aa08-2835-47a9-9c68-5b2936e8594e.mp4
 
-| Value | Field Name | Description |
-| --- | --- | --- |
-| `LOCAL_ENU_FRAME` | 0 | Local coordinates |
-| `BODY_FLU_FRAME` | 1 | Body coordinates |
-| `GLOBAL_ENU_FRAME` | 2 | GPS coordinates |
+<br />
+
+# Credits
+
+If you use the code in the academic context, please cite:
+
+* M. Fernandez-Cortizas, M. Molina, P. Arias-Perez, R. Perez-Segui,
+D. Perez-Saura, and P. Campoy,  2023, ["Aerostack2: A software framework for
+developing multi-robot aerial systems"](https://arxiv.org/abs/2303.18237), ArXiv DOI 2303.18237.
