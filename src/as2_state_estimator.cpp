@@ -27,9 +27,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 /**
-* @file mocap_pose.cpp
+* @file as2_state_estimator.cpp
 *
-* An state estimation plugin mocap_pose for AeroStack2 implementation
+* An state estimation server for AeroStack2 implementation
 *
 * @authors David Pérez Saura
 *          Rafael Pérez Seguí
@@ -38,7 +38,44 @@
 *          Pedro Arias Pérez
 */
 
+#include "as2_state_estimator.hpp"
+namespace as2_state_estimator
+{
 
-#include "mocap_pose.hpp"
-#include <pluginlib/class_list_macros.hpp>
-PLUGINLIB_EXPORT_CLASS(mocap_pose::Plugin, as2_state_estimator_plugin_base::StateEstimatorBase)
+StateEstimator::StateEstimator(const rclcpp::NodeOptions & options)
+: as2::Node("state_estimator", get_modified_options(options))
+{
+  tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+  tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+  tfstatic_broadcaster_ = std::make_shared<tf2_ros::StaticTransformBroadcaster>(this);
+  try {
+    this->get_parameter("plugin_name", plugin_name_);
+  } catch (const rclcpp::ParameterTypeException & e) {
+    RCLCPP_FATAL(
+      this->get_logger(), "Launch argument <plugin_name> not defined or malformed: %s",
+      e.what());
+    this->~StateEstimator();
+  }
+  plugin_name_ += "::Plugin";
+  loader_ =
+    std::make_shared<pluginlib::ClassLoader<as2_state_estimator_plugin_base::StateEstimatorBase>>(
+    "as2_state_estimator", "as2_state_estimator_plugin_base::StateEstimatorBase");
+  try {
+    plugin_ptr_ = loader_->createSharedInstance(plugin_name_);
+    plugin_ptr_->setup(this, tf_buffer_, tf_broadcaster_, tfstatic_broadcaster_);
+  } catch (const pluginlib::PluginlibException & e) {
+    RCLCPP_FATAL(this->get_logger(), "Failed to load plugin: %s", e.what());
+    this->~StateEstimator();
+  }
+}
+
+rclcpp::NodeOptions StateEstimator::get_modified_options(const rclcpp::NodeOptions & options)
+{
+  // Create a copy of the options and modify it
+  rclcpp::NodeOptions modified_options = options;
+  modified_options.allow_undeclared_parameters(true);
+  modified_options.automatically_declare_parameters_from_overrides(true);
+  return modified_options;
+}
+
+}  // namespace as2_state_estimator
