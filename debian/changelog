@@ -1,0 +1,100 @@
+ros-humble-as2-platform-multirotor-simulator (1.1.2-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Thu, 22 Aug 2024 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.1.1-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 20 Aug 2024 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.1.0-2jammy) jammy; urgency=high
+
+  * [as2_platform_multirotor_simulator] Enable control using odometry as state instead of ground truth
+  * [as2_platform_multirotor_simulator] Update platform to use world.yaml and rename some params
+  * [as2_platform_multirotor_simulator] New launch utils to declare parameters from a config file, update launchers at multirotor simulation
+  * [as2_platform_multirotor_simulator] Change gtest to use as2 core mock
+  * [as2_platform_multirotor_simulator] Add basic fly gtest
+  * [as2_platform_multirotor_simulator] Add ament_cmake_gtest to package.xml
+  * [as2_platform_multirotor_simulator] Remove LICENCE and CONTRIBUTING to use the ones in the aerostack2
+  * [as2_platform_multirotor_simulator] Update launchers to Flake8
+  * [as2_multirotor_simulator] Add as2_multirotor_simulator package
+  * Contributors: Miguel Fernandez-Cortizas, Rafael Perez-Segui, keikei014
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Thu, 08 Aug 2024 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.9-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 25 Mar 2024 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.8-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 12 Feb 2024 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.7-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sun, 04 Feb 2024 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.6-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 12 Dec 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.5-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 08 Nov 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.4-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Wed, 23 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.3-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 22 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.2-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Thu, 17 Aug 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.1-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Tue, 25 Apr 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (1.0.0-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Sat, 18 Mar 2023 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (0.2.2-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Thu, 22 Dec 2022 00:00:00 -0000
+
+ros-humble-as2-platform-multirotor-simulator (0.2.1-2jammy) jammy; urgency=high
+
+
+
+ -- CVAR-UPM <cvar.upm3@gmail.com>  Mon, 19 Dec 2022 00:00:00 -0000
+
+
