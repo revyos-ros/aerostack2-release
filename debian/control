@@ -1,0 +1,12 @@
+Source: ros-humble-as2-external-object-to-tf
+Section: misc
+Priority: optional
+Maintainer: Computer Vision And Aerial Robotics Group (UPM) <cvar.upm3@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), libyaml-cpp-dev, ros-humble-ament-cmake, ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-as2-core, ros-humble-as2-msgs, ros-humble-geometry-msgs, ros-humble-mocap4r2-msgs, ros-humble-rclcpp, ros-humble-sensor-msgs, ros-humble-std-msgs, ros-humble-std-srvs, ros-humble-tf2, ros-humble-tf2-ros, ros-humble-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-humble-as2-external-object-to-tf
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libyaml-cpp-dev, ros-humble-ament-cmake, ros-humble-as2-core, ros-humble-as2-msgs, ros-humble-geometry-msgs, ros-humble-mocap4r2-msgs, ros-humble-rclcpp, ros-humble-sensor-msgs, ros-humble-std-msgs, ros-humble-std-srvs, ros-humble-tf2, ros-humble-tf2-ros, ros-humble-ros-workspace
+Description: Adds external objects pose to tf
