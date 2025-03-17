@@ -1,4 +1,4 @@
-From a192682d268a73b21f4803274228270d015fd226 Mon Sep 17 00:00:00 2001
+From c1e4cbd7ef1ad705e52b951dc0719ba768be080e Mon Sep 17 00:00:00 2001
 From: Zheng Junjie <zhengjunjie@iscas.ac.cn>
 Date: Wed, 6 Nov 2024 17:22:04 +0800
 Subject: [PATCH] set -DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF
