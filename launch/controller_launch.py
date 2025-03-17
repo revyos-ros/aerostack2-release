@@ -1,121 +1,175 @@
-""" Launch file for the controller manager node """
+# Copyright 2024 Universidad Politécnica de Madrid
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#
+#    * Neither the name of the the copyright holder nor the names of its
+#      contributors may be used to endorse or promote products derived from
+#      this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+"""Launch file for the controller manager node."""
+
+__authors__ = 'Pedro Arias Pérez, Rafael Pérez Seguí'
+__copyright__ = 'Copyright (c) 2024 Universidad Politécnica de Madrid'
+__license__ = 'BSD-3-Clause'
 
 import os
-import sys
-import logging
-from typing import List
-from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
+
+from ament_index_python.packages import get_package_share_directory
+from as2_core.declare_launch_arguments_from_config_file import DeclareLaunchArgumentsFromConfigFile
+from as2_core.launch_configuration_from_config_file import LaunchConfigurationFromConfigFile
+from as2_core.launch_plugin_utils import get_available_plugins
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from ament_index_python.packages import get_package_share_directory
-from xml.etree import ElementTree
-
-FORMAT = '[%(levelname)s] [launch]: %(message)s'
-logging.basicConfig(format=FORMAT)
+from launch.substitutions import EnvironmentVariable, LaunchConfiguration, PathJoinSubstitution
+from launch_ros.actions import Node
+import yaml
 
 
-def get_available_plugins(package_name: str) -> List[str]:
-    """
-    Parse plugins.xml file from package and return a list of plugins from a specific type
-    """
-    plugins_file = os.path.join(
-        get_package_share_directory(package_name),
-        'plugins.xml'
-    )
-    root = ElementTree.parse(plugins_file).getroot()
+def recursive_search(data_dict, target_key, result=None):
+    """Search for a target key in a nested dictionary or list."""
+    if result is None:
+        result = []
 
-    available_plugins = []
+    if isinstance(data_dict, dict):
+        for key, value in data_dict.items():
+            if key == target_key:
+                result.append(value)
+            else:
+                recursive_search(value, target_key, result)
+    elif isinstance(data_dict, list):
+        for item in data_dict:
+            recursive_search(item, target_key, result)
 
-    # Check if the root element is a <class_libraries> or <library> tag
-    if root.tag == 'class_libraries':
-        # Find all elements with the tag 'library' under the root
-        libraries = root.findall('library')
-    elif root.tag == 'library':
-        # If the root is a single <library> tag, consider it as a list itself
-        libraries = [root]
-    else:
-        # If the root tag is neither <class_libraries> nor <library>, return empty list
-        return available_plugins
-
-    for library in libraries:
-        # Extract plugin information from the 'class' tag
-        classes = library.findall('class')
-        for plugin_class in classes:
-            plugin_type = plugin_class.attrib.get('type')
-            if plugin_type:
-                plugin_name = plugin_type.split('::')[0]
-                available_plugins.append(plugin_name)
-
-    return available_plugins
+    return result
 
 
-def get_controller_manager_node(context):
-    """ Returns the controller manager node """
+def get_package_config_file():
+    """Return the package config file."""
+    package_folder = get_package_share_directory('as2_motion_controller')
+    return os.path.join(package_folder,
+                        'config/motion_controller_default.yaml')
+
+
+def override_plugin_name_in_context(context):
+    """Override plugin_name in the context from config_file if it is not provided as argument."""
     plugin_name = LaunchConfiguration('plugin_name').perform(context)
-    if not plugin_name:
-        logging.critical("Plugin not set.")
-        sys.exit(1)
+    if plugin_name == '':
+        config_file = LaunchConfiguration('config_file').perform(context)
+        with open(config_file, 'r') as file:
+            config = yaml.safe_load(file)
+        plugin_names = recursive_search(config, 'plugin_name')
+        for plugin_name in plugin_names:
+            if plugin_name in get_available_plugins('as2_motion_controller'):
+                break
 
-    parameters = [{
-        'plugin_name': plugin_name,
-        'use_sim_time': LaunchConfiguration('use_sim_time'),
-        'plugin_available_modes_config_file': LaunchConfiguration(
-            'plugin_available_modes_config_file')
-    }]
+    if plugin_name == '':
+        raise RuntimeError('No plugin_name provided or not found in config_file.')
 
-    plugin_config_file = LaunchConfiguration(
-        'plugin_config_file').perform(context)
+    context.launch_configurations['plugin_name'] = plugin_name
+    return
 
-    if not plugin_config_file:
-        print("Finding default config file for plugin: " + plugin_name)
+
+def get_launch_description_from_plugin(
+        plugin_name: str | LaunchConfiguration) -> LaunchDescription:
+    """Get LaunchDescription from plugin."""
+    package_folder = get_package_share_directory('as2_motion_controller')
+    if isinstance(plugin_name, LaunchConfiguration):
         plugin_config_file = PathJoinSubstitution([
-            FindPackageShare('as2_motion_controller'),
-            'plugins/' + plugin_name + '/config', 'controller_default.yaml'
+            package_folder,
+            'plugins', LaunchConfiguration('plugin_name'), 'config/controller_default.yaml'
         ])
-        print("Found default config file: plugins/" +
-              plugin_name + "/config/controller_default.yaml")
-
-    parameters.append(plugin_config_file)
-
-    controller_config_file = LaunchConfiguration(
-        'motion_controller_config_file').perform(context)
-
-    if not controller_config_file:
-        controller_config_file = PathJoinSubstitution([
-            FindPackageShare('as2_motion_controller'),
-            'config', 'motion_controller_default.yaml'
+        plugin_available_modes_config_file = PathJoinSubstitution([
+            package_folder,
+            'plugins', LaunchConfiguration('plugin_name'), 'config/available_modes.yaml'
         ])
-
-    parameters.append(controller_config_file)
-
-
-    node = Node(
-        package='as2_motion_controller',
-        executable='as2_motion_controller_node',
-        namespace=LaunchConfiguration('namespace'),
-        parameters=parameters,
-        output='screen',
-        emulate_tty=True
-    )
-
-    return [node]
+    elif plugin_name == '':
+        plugin_config_file = ''
+        plugin_available_modes_config_file = ''
+    else:
+        plugin_config_file = os.path.join(
+            package_folder, 'plugins/' + plugin_name + '/config/controller_default.yaml')
+        plugin_available_modes_config_file = os.path.join(
+            package_folder, 'plugins/' + plugin_name + '/config/available_modes.yaml')
+    return [
+        DeclareLaunchArgument('log_level',
+                              description='Logging level',
+                              default_value='info'),
+        DeclareLaunchArgument('use_sim_time',
+                              description='Use simulation clock if true',
+                              default_value='false'),
+        DeclareLaunchArgument('namespace',
+                              description='Drone namespace',
+                              default_value=EnvironmentVariable('AEROSTACK2_SIMULATION_DRONE_ID')),
+        DeclareLaunchArgumentsFromConfigFile(
+            name='config_file',
+            source_file=get_package_config_file(),
+            description='Configuration file'),
+        DeclareLaunchArgument(
+            'plugin_available_modes_config_file',
+            description='Plugin available modes configuration file',
+            default_value=plugin_available_modes_config_file),
+        DeclareLaunchArgumentsFromConfigFile(
+            name='plugin_config_file',
+            source_file=plugin_config_file,
+            description='Plugin configuration file'),
+        Node(
+            package='as2_motion_controller',
+            executable='as2_motion_controller_node',
+            name='controller_manager',
+            namespace=LaunchConfiguration('namespace'),
+            output='screen',
+            arguments=['--ros-args', '--log-level',
+                       LaunchConfiguration('log_level')],
+            emulate_tty=True,
+            parameters=[
+                {
+                    'use_sim_time': LaunchConfiguration('use_sim_time'),
+                    'plugin_name': LaunchConfiguration('plugin_name'),
+                    'plugin_available_modes_config_file': LaunchConfiguration(
+                        'plugin_available_modes_config_file')
+                },
+                LaunchConfigurationFromConfigFile(
+                    'config_file',
+                    default_file=get_package_config_file()),
+                LaunchConfigurationFromConfigFile(
+                    'plugin_config_file',
+                    default_file=plugin_config_file),
+            ]
+        )
+    ]
 
 
 def generate_launch_description():
-    """ Returns the launch description """
-    launch_description = LaunchDescription([
-        DeclareLaunchArgument('namespace'),
+    """Return the launch description."""
+    plugin_choices = get_available_plugins('as2_motion_controller')
+    plugin_choices.append('')
+    ld = [
         DeclareLaunchArgument(
-            'motion_controller_config_file', default_value=''),
-        DeclareLaunchArgument(
-            'plugin_name', choices=get_available_plugins('as2_motion_controller')),
-        DeclareLaunchArgument('plugin_config_file', default_value=''),
-        DeclareLaunchArgument(
-            'plugin_available_modes_config_file', default_value=''),
-        DeclareLaunchArgument('use_sim_time', default_value='false'),
-        OpaqueFunction(function=get_controller_manager_node)
-    ])
-
-    return launch_description
+            'plugin_name',
+            default_value='',
+            description='Plugin name. If empty, it must be declared in config file.',
+            choices=plugin_choices),
+    ]
+    ld.append(OpaqueFunction(function=override_plugin_name_in_context))
+    ld.extend(get_launch_description_from_plugin(LaunchConfiguration('plugin_name')))
+    return LaunchDescription(ld)
