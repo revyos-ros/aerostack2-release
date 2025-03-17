@@ -1,7 +1,7 @@
-From 22cf77b4bec470d8f1e90aa312f819f6cbcf51cb Mon Sep 17 00:00:00 2001
+From 56ad64620cd7eef5b28a3208fd61c8b200ff89d7 Mon Sep 17 00:00:00 2001
 From: Sakura286 <sakura286@outlook.com>
 Date: Tue, 28 May 2024 21:55:36 +0800
-Subject: [PATCH] update deprecated api from cv::aruco::drawAxis to
+Subject: [PATCH 1/2] update deprecated api from cv::aruco::drawAxis to
  cv::drawFrameAxes
 
 ---
@@ -36,5 +36,5 @@ index 00000000..5daac430
 @@ -0,0 +1 @@
 +001-fix-opencv-aruco-old-api.patch
 -- 
-2.45.2
+2.48.1
 

@@ -1,0 +1,43 @@
+From ac10612fadd7c1bba2abedded5b455cfac3023f7 Mon Sep 17 00:00:00 2001
+From: Zheng Junjie <zhengjunjie@iscas.ac.cn>
+Date: Wed, 6 Nov 2024 17:19:01 +0800
+Subject: [PATCH 2/2] Revert "update deprecated api from cv::aruco::drawAxis to
+ cv::drawFrameAxes"
+
+This reverts commit 56ad64620cd7eef5b28a3208fd61c8b200ff89d7.
+
+upstream fixed.
+---
+ debian/patches/001-fix-opencv-aruco-old-api.patch | 11 -----------
+ debian/patches/series                             |  1 -
+ 2 files changed, 12 deletions(-)
+ delete mode 100644 debian/patches/001-fix-opencv-aruco-old-api.patch
+ delete mode 100644 debian/patches/series
+
+diff --git a/debian/patches/001-fix-opencv-aruco-old-api.patch b/debian/patches/001-fix-opencv-aruco-old-api.patch
+deleted file mode 100644
+index e109d280..00000000
+--- a/debian/patches/001-fix-opencv-aruco-old-api.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- a/detect_aruco_markers_behavior/src/detect_aruco_markers_behavior.cpp
+-+++ b/detect_aruco_markers_behavior/src/detect_aruco_markers_behavior.cpp
+-@@ -191,7 +191,7 @@
+-       cv::composeRT(rvec * 0, tvec * 0, rvec, tvec, rout, tout);
+-       aruco_position = tout;
+-       aruco_rotation = rout;
+--      cv::aruco::drawAxis(output_image, camera_matrix_, dist_coeffs_, rout, tout, 0.08625);
+-+      cv::drawFrameAxes(output_image, camera_matrix_, dist_coeffs_, rout, tout, 0.08625, 3);
+-     }
+-   }
+- 
+diff --git a/debian/patches/series b/debian/patches/series
+deleted file mode 100644
+index 5daac430..00000000
+--- a/debian/patches/series
++++ /dev/null
+@@ -1 +0,0 @@
+-001-fix-opencv-aruco-old-api.patch
+-- 
+2.48.1
+
